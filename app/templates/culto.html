@@ -1,0 +1,22 @@
+<!-- <form method="post">
+    {{ form.csrf_token }}
+    <label>Data do culto: </label><input type="date" name="data"/>
+    <label>Limite de pessoas no culto: </label><input type="number" name="limite" default="80" />
+    <button type="submit">Criar</button>
+</form> -->
+
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<div class="container">
+    <form action="" method="POST">
+        {{ form.csrf_token }}
+        <label>Data do culto: </label><input type="date" name="data" />
+        <label>Limite de pessoas no culto: </label><input type="number" name="limite" default="80" />
+        <input type=submit class='btn btn-primary '>
+    </form>
+</div>
+
+{% endblock %}
