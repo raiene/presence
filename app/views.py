@@ -25,8 +25,8 @@ def registration():
         print(last_culto)
         # form.culto = last_culto.id
         del form.csrf_token
-        print(form.culto)
-        # form.save()
+        # print(form.culto)
+        form.save()
         msg = 'Presença confirmada!'
         send = True
     return render_template('index.html', form=form, sended=send, msg=msg)
