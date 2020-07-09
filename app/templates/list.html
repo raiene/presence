@@ -1,0 +1,21 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+    <div>
+        <ul class="list-group">
+            {% for person in presences %}
+                <li class="list-group-item list-group-item-dark">
+                    {{ person.nome }}
+                    <small>{{ person.data }}</small>
+                    <small class="text-muted">
+                        {% if person.precisa_assento == True %}
+                            Adulto
+                        {% else %}
+                            Criança
+                        {% endif %}
+                    </small>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
