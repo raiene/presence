@@ -2,11 +2,13 @@
 
 {% block content %}
     <div>
+        <h3>{{ culto.__repr__() }}</h5>
         <ul class="list-group">
             {% for person in presences %}
                 <li class="list-group-item list-group-item-dark">
+                    <small>{{ loop.index }}</small>
                     {{ person.nome }}
-                    <small>{{ person.data }}</small>
+                    <p class="mb-1">{{ person.data_criacao }}</p>
                     <small class="text-muted">
                         {% if person.precisa_assento == True %}
                             Adulto
