@@ -14,7 +14,8 @@ class Culto(db.Document):
     @classmethod
     def post_save(cls, sender, document, **kwargs):
         print("Post Save: %s" % document.data)
-        culto = Culto.objects.filter(ativo=True, id__ne=document.id).update(ativo=False)
+        if 'created' in kwargs:
+            culto = Culto.objects.filter(ativo=True, id__ne=document.id).update(ativo=False)
 
 
 CultoForm = model_form(Culto)
