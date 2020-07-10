@@ -196,10 +196,10 @@ iframe {
   padding: 55px 55px 37px 55px;
 
   background: #25753d;
-  background: -webkit-linear-gradient(top, #6bce5d, #094615);
-  background: -o-linear-gradient(top, #6bce5d, #094615);
-  background: -moz-linear-gradient(top, #6bce5d, #094615);
-  background: linear-gradient(top, #6bce5d, #094615);
+  background: -webkit-linear-gradient(top, #6bce5d, #005131);
+  background: -o-linear-gradient(top, #6bce5d, #005131);
+  background: -moz-linear-gradient(top, #6bce5d, #005131);
+  background: linear-gradient(top, #6bce5d, #005131);
 }
 
 
@@ -426,10 +426,10 @@ iframe {
   border-radius: 25px;
 
   background: #25753d;
-  background: -webkit-linear-gradient(bottom, #6bce5d, #094615);
-  background: -o-linear-gradient(bottom, #6bce5d, #094615);
-  background: -moz-linear-gradient(bottom, #6bce5d, #094615);
-  background: linear-gradient(bottom, #6bce5d, #094615);
+  background: -webkit-linear-gradient(bottom, #6bce5d, #005131);
+  background: -o-linear-gradient(bottom, #6bce5d, #005131);
+  background: -moz-linear-gradient(bottom, #6bce5d, #005131);
+  background: linear-gradient(bottom, #6bce5d, #005131);
   position: relative;
   z-index: 1;
 
