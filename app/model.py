@@ -10,7 +10,7 @@ class Culto(db.Document):
     vagas = db.IntField(default=80)
 
     def __repr__(self):
-        return f'Culto: {self.data}({self.vagas}/{self.limite})'
+        return f'Culto: {self.data}({self.get_vagas_reais()}/{self.limite})'
 
     def get_vagas_reais(self):
         return len(Presenca.objects.filter(culto=self.id, precisa_assento=True))
