@@ -10,11 +10,10 @@
                     {{ person.nome }}
                     <p class="mb-1">{{ person.data_criacao }}</p>
                     <small class="text-muted">
-                        {% if person.precisa_assento == True %}
-                            Adulto
-                        {% else %}
-                            Criança
+                        {% if person.precisa_assento == False %}
+                            Não
                         {% endif %}
+                        Válida
                     </small>
                 </li>
             {% endfor %}

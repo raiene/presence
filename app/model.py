@@ -1,6 +1,7 @@
 from datetime import datetime
 from app import db
 from flask_mongoengine.wtf import model_form
+from wtforms import Form, StringField
 
 class Culto(db.Document):
     data = db.DateField()
@@ -10,6 +11,9 @@ class Culto(db.Document):
 
     def __repr__(self):
         return f'Culto: {self.data}({self.vagas}/{self.limite})'
+
+    def get_vagas_reais(self):
+        return len(Presenca.objects.filter(culto=self.id, precisa_assento=True))
 
     @classmethod
     def post_save(cls, sender, document, **kwargs):
@@ -36,6 +40,9 @@ class Presenca(db.Document):
 
 
 RegForm = model_form(Presenca)
+
+class BuscaForm(Form):
+    busca = StringField()
 
 db.signals.post_save.connect(Presenca.post_save, sender=Presenca)
 db.signals.post_save.connect(Culto.post_save, sender=Culto)

@@ -37,6 +37,7 @@
 					<span class="login100-form-logo">
 						<img src="static/iconeredondo.png" alt="Logo IPB" width="125" height="125">
 					</span>
+					{% block formu %}
 					{% if  not sended %}
 						{{ form.csrf_token }}
 						<span class="login100-form-title p-b-34 p-t-27">
@@ -65,6 +66,7 @@
 						</span>
 						<a class="txt1" href="/">Confirmar outra presença</a>
 					{% endif %}
+					{% endblock %}
 				</form>
 			</div>
 		</div>

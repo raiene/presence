@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% block formu %}
+    <span class="login100-form-title p-b-34 p-t-27">
+        Verificar confirmação no culto {{ "{}/{}/{}".format(culto.data.day, culto.data.month, culto.data.year) }}
+    </span>
+
+    <div class="wrap-input100 validate-input" data-validate="Enter name">
+        <input class="input100" type="text" name="busca" placeholder="como você confirmou seu nome">
+        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+    </div>
+
+    <div class="container-login100-form-btn">
+        <button name="action_save" class="login100-form-btn" type="submit">
+            Pesquisar
+        </button>
+    </div>
+    {% if resultados %}
+        <div>
+            <ul>
+                {% for result in resultados %}
+                <li>{{ result.nome }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,6 +1,6 @@
-from datetime import datetime
+from datetime import datetime, date
 from flask import Flask, request, render_template
-from app.model import CultoForm, RegForm, Culto, Presenca
+from app.model import CultoForm, RegForm, Culto, Presenca, BuscaForm
 from flask_bootstrap import Bootstrap
 from flask_mongoengine import MongoEngine
 from app import app
@@ -17,6 +17,7 @@ def registration():
     send = False
     msg = ''
     form = RegForm(request.form)
+    # last_culto = {'data': date(2020,7,12)}
     last_culto = Culto.objects.get(ativo=True)
     if request.method == 'POST' and form.validate_on_submit():
         print('Passou, de algum jeito')
@@ -25,7 +26,7 @@ def registration():
         del form.csrf_token
         # print(form.culto)
         last_culto = Culto.objects.get(ativo=True)
-        if last_culto.vagas > 0:
+        if last_culto.get_vagas_reais() > 0:
             form.save()
             msg = 'Presença confirmada!'
             send = True
@@ -55,3 +56,13 @@ def lista_presentes():
     presencas = Presenca.objects.filter(culto=culto.id)
     return render_template('list.html', culto=culto, presences=presencas)
 
+@app.route('/seencontre', methods=['GET', 'POST'])
+def seache():
+    culto = Culto.objects.get(ativo=True)
+    form = BuscaForm(request.form)
+    if request.method == 'POST':
+        print(dir(form.busca))
+        print(form.busca.data)
+        resultados = Presenca.objects.filter(culto=culto.id, nome__icontains=form.busca.data)
+        print(resultados)
+    return render_template('busca.html', culto=culto, form=form, resultados=resultados)
