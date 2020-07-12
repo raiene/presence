@@ -40,6 +40,7 @@
 					{% block formu %}
 					{% if  not sended %}
 						{{ form.csrf_token }}
+						{% if culto %}
 						<span class="login100-form-title p-b-34 p-t-27">
 							Confirme sua presença no culto {{ "{}/{}/{}".format(culto.data.day, culto.data.month, culto.data.year) }}
 						</span>
@@ -60,6 +61,11 @@
 								Confirme
 							</button>
 						</div>
+						{% else %}
+							<span class="login100-form-title p-b-34 p-t-27">
+								Nenhum culto disponível
+							</span>
+						{% endif %}
 					{% else %}
 						<span class="login100-form-title p-b-34 p-t-27">
 							{{ msg }}

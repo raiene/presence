@@ -25,11 +25,19 @@ class Culto(db.Document):
 CultoForm = model_form(Culto)
 
 
+def get_last_culto():
+    import app
+    try:
+        return Culto.objects.get(ativo=True).id
+    except db.DoesNotExist:
+        return None
+
+
 class Presenca(db.Document):
     nome = db.StringField(required=True)
     precisa_assento = db.BooleanField(default=True)
     data_criacao = db.DateTimeField(default=datetime.now())
-    culto = db.ObjectIdField(required=True, default=Culto.objects.get(ativo=True).id)
+    culto = db.ObjectIdField(required=True, default=get_last_culto())
 
     @classmethod
     def post_save(cls, sender, document, **kwargs):

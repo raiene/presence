@@ -18,7 +18,10 @@ def registration():
     msg = ''
     form = RegForm(request.form)
     # last_culto = {'data': date(2020,7,12)}
-    last_culto = Culto.objects.get(ativo=True)
+    try:
+        last_culto = Culto.objects.get(ativo=True)
+    except Culto.DoesNotExist:
+        last_culto = None
     if request.method == 'POST' and form.validate_on_submit():
         print('Passou, de algum jeito')
         print(last_culto)
