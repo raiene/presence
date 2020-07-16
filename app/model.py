@@ -4,20 +4,20 @@ from flask_mongoengine.wtf import model_form
 from wtforms import Form, StringField
 
 class Culto(db.Document):
-    data = db.DateField()
+    dt_culto = db.DateField(default=datetime.now())
     ativo = db.BooleanField(default=True)
     limite = db.IntField(default=80)
     vagas = db.IntField(default=80)
 
     def __repr__(self):
-        return f'Culto: {self.data}({self.get_vagas_reais()}/{self.limite})'
+        return f'Culto: {self.dt_culto}({self.get_vagas_reais()}/{self.limite})'
 
     def get_vagas_reais(self):
         return len(Presenca.objects.filter(culto=self.id, precisa_assento=True))
 
     @classmethod
     def post_save(cls, sender, document, **kwargs):
-        print("Post Save: %s" % document.data)
+        print("Post Save: %s" % document.dt_culto)
         if 'created' in kwargs:
             culto = Culto.objects.filter(ativo=True, id__ne=document.id).update(ativo=False)
 
