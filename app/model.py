@@ -13,7 +13,7 @@ class Culto(db.Document):
         return f'Culto: {self.dt_culto}({self.get_vagas_reais()}/{self.limite})'
 
     def get_vagas_reais(self):
-        return len(Presenca.objects.filter(culto=self.id, precisa_assento=True))
+        return self.limite - len(Presenca.objects.filter(culto=self.id, precisa_assento=True))
 
     @classmethod
     def post_save(cls, sender, document, **kwargs):
