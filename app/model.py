@@ -52,5 +52,7 @@ RegForm = model_form(Presenca)
 class BuscaForm(Form):
     busca = StringField()
 
-db.signals.post_save.connect(Presenca.post_save, sender=Presenca)
-db.signals.post_save.connect(Culto.post_save, sender=Culto)
+# db.signals.post_save.connect(Presenca.post_save, sender=Presenca)
+# db.signals.post_save.connect(Culto.post_save, sender=Culto)
+
+# admin.add_view(ModelView(Culto))
