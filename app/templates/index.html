@@ -42,7 +42,7 @@
 						{{ form.csrf_token }}
 						{% if culto %}
 						<span class="login100-form-title p-b-34 p-t-27">
-							Confirme sua presença no culto {{ "{}/{}/{}".format(culto.data.day, culto.data.month, culto.data.year) }}
+							Confirme sua presença no culto {{ "{}/{}/{}".format(culto.dt_culto.day, culto.dt_culto.month, culto.dt_culto.year) }}
 						</span>
 
 						<div class="wrap-input100 validate-input" data-validate = "Enter name">
