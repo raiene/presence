@@ -44,9 +44,10 @@
 						<span class="login100-form-title p-b-34 p-t-27">
 							Confirme sua presença no culto {{ "{}/{}/{}".format(culto.dt_culto.day, culto.dt_culto.month, culto.dt_culto.year) }}
 						</span>
-
+						<!-- <p class="error">{{ form.errors }}</p> -->
 						<div class="wrap-input100 validate-input" data-validate = "Enter name">
-							<input class="input100" type="text" name="nome" placeholder="inscrição individual">
+							<!-- <label for="nome">Inscrição individual</label> -->
+							<input class="input100" type="text" name="nome" placeholder="seu nome" maxlength="20" >
 							<span class="focus-input100" data-placeholder="&#xf207;"></span>
 						</div>
 						<!-- <div class="contact100-form-checkbox">
