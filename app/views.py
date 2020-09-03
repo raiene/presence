@@ -56,7 +56,7 @@ def cultos():
 def lista_presentes():
     # culto = Culto.objects.get(ativo=True)
     culto = Culto.objects.order_by('-dt_culto').first()
-    presencas = Presenca.objects.filter(culto=culto.id, precisa_assento=True)
+    presencas = Presenca.objects.filter(culto=culto.id)
     return render_template('list.html', culto=culto, presences=presencas)
 
 @app.route('/seencontre', methods=['GET', 'POST'])
