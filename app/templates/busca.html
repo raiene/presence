@@ -2,7 +2,7 @@
 
 {% block formu %}
     <span class="login100-form-title p-b-34 p-t-27">
-        Verificar confirmação no culto {{ "{}/{}/{}".format(culto.data.day, culto.data.month, culto.data.year) }}
+        Verificar confirmação no culto {{ "{}/{}/{}".format(culto.dt_culto.day, culto.dt_culto.month, culto.dt_culto.year) }}
     </span>
 
     <div class="wrap-input100 validate-input" data-validate="Enter name">
