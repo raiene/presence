@@ -4,38 +4,37 @@ from app.model import CultoForm, RegForm, Culto, Presenca, BuscaForm
 from flask_bootstrap import Bootstrap
 from flask_mongoengine import MongoEngine
 from app import app
+import locale
 
 
-# app = Flask(__name__)
-# app.config.from_object("config")
-# db = MongoEngine(app)
-# Bootstrap(app)
-# db.connect()
+locale.setlocale(locale.LC_TIME, ('pt_BR', 'UTF-8'))
+
 
 @app.route('/', methods=['GET', 'POST'])
 def registration():
     send = False
     msg = ''
-    form = RegForm(request.form)
     last_culto = None
-    # try:
-    #     last_culto = Culto.objects.get(ativo=True)
-    # except Culto.DoesNotExist:
-    #     last_culto = None
-    if request.method == 'POST' and form.validate_on_submit():
-        print('Passou, de algum jeito')
-        print(last_culto)
-        # form.culto = last_culto.id
-        del form.csrf_token
-        # print(form.culto)
-        last_culto = Culto.objects.get(ativo=True)
-        if last_culto.get_vagas_reais() > 0:
+    form = RegForm(request.form)
+    form.culto.choices = [(x.id, x.dt_culto.strftime("%d/%m/%Y - %A")) for x in Culto.objects.filter(ativo=True)]
+    cultos = Culto.objects.filter(ativo=True)
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            print('Passou, de algum jeito')
+            # form.culto = last_culto.id
+            del form.csrf_token
+            print(form.culto)
+            # last_culto = form.culto
+            # if last_culto.get_vagas_reais() > 0:
             form.save()
             msg = 'Presença confirmada!'
             send = True
+            # else:
+            #     msg = 'Não há mais vagas :('
         else:
-            msg = 'Não há mais vagas :('
-    return render_template('index.html', form=form, sended=send, msg=msg, culto=last_culto)
+            print(form.errors)
+            print(form.culto)
+    return render_template('registration.html', form=form, sended=send, msg=msg, culto=last_culto, cultos=cultos)
 
 @app.route('/addreunion', methods=['GET', 'POST'])
 def cultos():
