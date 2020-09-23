@@ -1,7 +1,8 @@
 from datetime import datetime
 from app import db
 from flask_mongoengine.wtf import model_form
-from wtforms import Form, StringField
+from wtforms import Form, StringField, SelectField, Form
+import bson
 
 class Culto(db.Document):
     dt_culto = db.DateField(default=datetime.now())
@@ -37,7 +38,7 @@ class Presenca(db.Document):
     nome = db.StringField(required=True)
     precisa_assento = db.BooleanField(default=True)
     data_criacao = db.DateTimeField(default=datetime.now())
-    culto = db.ObjectIdField(required=True, default=get_last_culto())
+    culto = db.ObjectIdField(required=True)#, default=get_last_culto())
 
     @classmethod
     def post_save(cls, sender, document, **kwargs):
@@ -47,7 +48,10 @@ class Presenca(db.Document):
         culto.save()
 
 
-RegForm = model_form(Presenca)
+class RegForm(model_form(Presenca)):
+    model = Presenca
+
+    culto = SelectField('Culto', coerce=bson.objectid.ObjectId)
 
 class BuscaForm(Form):
     busca = StringField()
