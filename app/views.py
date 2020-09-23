@@ -4,10 +4,6 @@ from app.model import CultoForm, RegForm, Culto, Presenca, BuscaForm
 from flask_bootstrap import Bootstrap
 from flask_mongoengine import MongoEngine
 from app import app
-import locale
-
-
-locale.setlocale(locale.LC_TIME, ('pt_BR', 'UTF-8'))
 
 
 @app.route('/', methods=['GET', 'POST'])
