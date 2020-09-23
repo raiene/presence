@@ -23,7 +23,7 @@ def registration():
             print('Passou, de algum jeito')
             # form.culto = last_culto.id
             del form.csrf_token
-            print(form.culto)
+            # print(form.culto)
             # last_culto = form.culto
             # if last_culto.get_vagas_reais() > 0:
             form.save()
