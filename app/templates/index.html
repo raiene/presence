@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+{% block head %}
 <head>
 	<title>Confirmação de presença - IP Vida Nova Palmas</title>
 	<meta charset="UTF-8">
@@ -27,22 +28,21 @@
 	<link rel="stylesheet" type="text/css" href="static/v3/css/main.css">
 <!--===============================================================================================-->
 </head>
+{% endblock %}
 <body>
-
+{% block content %}
 	<div class="limiter">
-		<!-- {% block content %} -->
 		<div class="container-login100" style="background-image: url('static/v3/images/bg-01.jpg');">
 			<div class="wrap-login100">
+				{% block form %}
 				<form class="login100-form validate-form" method="post" role="form" >
 					<span class="login100-form-logo">
 						<img src="static/iconeredondo.png" alt="Logo IPB" width="125" height="125">
 					</span>
 					{% block formu %}
-					{% if  not sended %}
-						{{ form.csrf_token }}
-						{% if culto %}
+						{% if cultos %}
 						<span class="login100-form-title p-b-34 p-t-27">
-							Confirme sua presença no culto {{ "{}/{}/{}".format(culto.dt_culto.day, culto.dt_culto.month, culto.dt_culto.year) }}
+							Em qual dos cultos abaixo gostaria de confirmar presença?
 						</span>
 						<!-- <p class="error">{{ form.errors }}</p> -->
 						<div class="wrap-input100 validate-input" data-validate = "Enter name">
@@ -67,17 +67,11 @@
 								Nenhum culto disponível
 							</span>
 						{% endif %}
-					{% else %}
-						<span class="login100-form-title p-b-34 p-t-27">
-							{{ msg }}
-						</span>
-						<a class="txt1" href="/">Confirmar outra presença</a>
-					{% endif %}
 					{% endblock %}
 				</form>
+				{% endblock %}
 			</div>
 		</div>
-		<!-- {% endblock %} -->
 	</div>
 
 
@@ -101,4 +95,5 @@
 	<script src="static/v3/js/main.js"></script>
 
 </body>
+{% endblock %}
 </html>
