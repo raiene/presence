@@ -4,8 +4,8 @@ from datetime import datetime
 from app import db #, admin
 from flask_mongoengine.wtf import model_form
 from wtforms import Form, StringField, SelectField
-# from flask_admin.contrib.mongoengine import ModelView
-# from flask_admin.actions import action
+from flask_admin.contrib.mongoengine import ModelView
+from flask_admin.actions import action
 
 class Culto(db.Document):
     dt_culto = db.DateField(default=datetime.now())
