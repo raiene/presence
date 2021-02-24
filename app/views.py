@@ -16,7 +16,7 @@ def registration():
     msg = ''
     last_culto = None
     form = RegForm(request.form)
-    form.culto.choices = [(x.id, x.dt_culto.strftime("%d/%m/%Y - %A")) for x in Culto.objects.filter(ativo=True)]
+    form.culto.choices = [(x.id, '%s (%s)' %(x.dt_culto.strftime("%d/%m/%Y - %A"), x.periodo)) for x in Culto.objects.filter(ativo=True)]
     cultos = Culto.objects.filter(ativo=True)
     if request.method == 'POST':
         if form.validate_on_submit():
