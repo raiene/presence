@@ -3,20 +3,19 @@
 {% block content %}
     <div>
         <h3>{{ culto.__repr__() }}</h5>
+        {% if culto %}
         <ul class="list-group">
             {% for person in presences %}
                 <li class="list-group-item list-group-item-dark">
                     <small>{{ loop.index }}</small>
                     {{ person.nome }}
-                    <p class="mb-1">{{ person.data_criacao }}</p>
-                    <small class="text-muted">
-                        {% if person.precisa_assento == False %}
-                            Não
-                        {% endif %}
-                        Válida
-                    </small>
                 </li>
             {% endfor %}
         </ul>
+        {% else %}
+            {% for c in cultos %}
+            <h4><a href="/terradonunca/{{ c.id }}">{{ c.dt_culto }}/{{ c.periodo }}</a></h4>
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}

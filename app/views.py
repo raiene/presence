@@ -52,11 +52,18 @@ def cultos():
     return render_template('culto.html', form=form)
 
 @app.route('/terradonunca', methods=['GET'])
-def lista_presentes():
-    # culto = Culto.objects.get(ativo=True)
-    culto = Culto.objects.order_by('-dt_culto').first()
-    presencas = Presenca.objects.filter(culto=culto.id)
-    return render_template('list.html', culto=culto, presences=presencas)
+def lista_cultos():
+    cultos = Culto.objects.filter(ativo=True)
+
+    return render_template('list.html', culto=None, presences=None, cultos=cultos)
+
+@app.route('/terradonunca/<culto_id>', methods=['GET'])
+def lista_presentes(culto_id=None):
+    if culto_id:
+        culto = Culto.objects.get(id=culto_id)
+        presencas = Presenca.objects.filter(culto=culto.id)
+    else: presencas = None
+    return render_template('list.html', culto=culto, presences=presencas, culto_id=culto_id)
 
 @app.route('/seencontre', methods=['GET', 'POST'])
 def seache():
